@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/01/05 16:55:06 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/07 17:34:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,9 @@ Computor::Computor()
     degree = 0;
 }
 
-/*
-*** Class parser
-*/
-
-int Computor::parser()
+void Computor::display()
 {
-    return 0;
+    
 }
 
 /*

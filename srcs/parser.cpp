@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 16:07:49 by epham             #+#    #+#             */
-/*   Updated: 2021/01/05 16:54:51 by epham            ###   ########.fr       */
+/*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
+/*   Updated: 2021/01/07 17:58:00 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
+#include <string>
 
 /*
-*** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
+*** Split input string
 */
 
-int main(int ac, char **av) 
+int split_input(string arg)
 {
-    Computor myComputor;
+    if (regex_match (arg, regex("\\d+\\*[X|x]^0[+|-]\\d+\\*[X|x]^1[+|-]\\d+\\*[X|x]^2") ))
+        cout << "test OK" << endl;
+    return 0;
+}
 
-    myComputor.parser(ac, av);
+/*
+*** Class parser
+*/
+
+int Computor::parser(int ac, char **av)
+{
+    int i;
+
+    i = 0;
+    if (ac == 2)
+        split_input(av[1]);
     return 0;
 }

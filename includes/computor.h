@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/05 16:55:18 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/07 17:34:28 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #define COMPUTOR_H
 
 #include <iostream>
+
+// Parser
+#include <regex>
+
 using namespace std;
 
 /*
@@ -34,8 +38,9 @@ class Computor
     public:
         Computor ();
 
-        int parser();
+        int parser(int ac, char **av);
         int solver();
+        void display();
         int getDegree() { return degree; }
 };
 
