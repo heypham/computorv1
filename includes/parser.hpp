@@ -1,47 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   computor.h                                         :+:      :+:    :+:   */
+/*   parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/07 17:34:28 by epham            ###   ########.fr       */
+/*   Created: 2021/01/08 17:26:01 by epham             #+#    #+#             */
+/*   Updated: 2021/01/08 18:50:22 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMPUTOR_H
-#define COMPUTOR_H
+#ifndef PARSER_HPP
+#define PARSER_HPP
 
-#include <iostream>
-
-// Parser
 #include <regex>
+#include <string>
+#include <vector>
+#include "computor.hpp"
 
 using namespace std;
 
-/*
-*** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
-*/
-
-class Computor
+class Parser
 {
-    private:
-        int a1;
-        int a2;
-        int b1;
-        int b2;
-        int c1;
-        int c2;
-        int degree;
-
     public:
-        Computor ();
+        double a1;
+        double a2;
+        double b1;
+        double b2;
+        double c1;
+        double c2;
+        int error;
+        string equation;
 
-        int parser(int ac, char **av);
-        int solver();
-        void display();
-        int getDegree() { return degree; }
+        Parser(int ac, char **av);
+        int removeSpace();
+        ~Parser();
 };
 
 #endif

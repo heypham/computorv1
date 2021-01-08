@@ -6,24 +6,21 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/01/07 17:34:17 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/08 18:41:27 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "computor.h"
+#include "computor.hpp"
 
 /*
-*** Class constructor
+*** Class Constructor
 */
 
-Computor::Computor()
+Computor::Computor (int ac, char **av) : parser(ac, av) 
 {
-    a1 = 0;
-    a2 = 0;
-    b1 = 0;
-    b2 = 0;
-    c1 = 0;
-    c2 = 0;
+    a = 0.0;
+    b = 0.0;
+    c = 0.0;
     degree = 0;
 }
 

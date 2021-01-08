@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   computor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 16:07:49 by epham             #+#    #+#             */
-/*   Updated: 2021/01/08 18:38:01 by epham            ###   ########.fr       */
+/*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
+/*   Updated: 2021/01/08 18:41:48 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "computor.hpp"
+#ifndef COMPUTOR_HPP
+#define COMPUTOR_HPP
+
+#include <iostream>
+#include "parser.hpp"
+
+using namespace std;
 
 /*
 *** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
 */
 
-int main(int ac, char **av) 
+class Computor
 {
-    Computor myComputor(ac, av);
+        Parser parser;
+    public:
+        double a;
+        double b;
+        double c;
+        int degree;
 
-    return 0;
-}
+        Computor (int ac, char **av);
+
+        int solver();
+        void display();
+        int getDegree() { return degree; }
+
+        ~Computor();
+};
+
+#endif
