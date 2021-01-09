@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   computor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/01/08 18:41:27 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/08 21:28:43 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.hpp"
 
 /*
-*** Class Constructor
+*** Computor Constructor
 */
 
-Computor::Computor (int ac, char **av) : parser(ac, av) 
+Computor::Computor (int ac, char **av) : parser(ac, av), reducedEq()
 {
-    a = 0.0;
-    b = 0.0;
-    c = 0.0;
     degree = 0;
 }
 
@@ -30,7 +27,7 @@ void Computor::display()
 }
 
 /*
-*** Class solver
+*** Computor solver
 */
 
 int Computor::solver()

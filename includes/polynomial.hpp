@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   computor.hpp                                       :+:      :+:    :+:   */
+/*   polynomial.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/08 22:15:58 by emiliepham       ###   ########.fr       */
+/*   Created: 2021/01/08 21:04:49 by emiliepham        #+#    #+#             */
+/*   Updated: 2021/01/08 22:16:30 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMPUTOR_HPP
-#define COMPUTOR_HPP
+#ifndef POLYNOMIAL_HPP
+#define POLYNOMIAL_HPP
 
-#include "parser.hpp"
+#include <string>
 
-/*
-*** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
-*/
+using namespace std;
 
-class Computor
+class Polynomial
 {
-        Parser parser;
-        Polynomial reducedEq;
-
     public:
-        int degree;
+        double x0;
+        double x1;
+        double x2;
+        double delta;
+        string str;
 
-        Computor (int ac, char **av);
+        Polynomial();
+        
+        void setDeterminant();
 
-        int solver();
-        void display();
-        int getDegree() { return degree; }
-
-        ~Computor() {};
+        ~Polynomial() {};
 };
 
 #endif

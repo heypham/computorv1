@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   computor.hpp                                       :+:      :+:    :+:   */
+/*   polynomial.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/08 22:15:58 by emiliepham       ###   ########.fr       */
+/*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
+/*   Updated: 2021/01/09 02:26:38 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMPUTOR_HPP
-#define COMPUTOR_HPP
+#include "polynomial.hpp"
 
-#include "parser.hpp"
+double sqrt(double delta)
+{
+    return (0);
+}
+
+void Polynomial::setDeterminant()
+{
+    // delta = x1**2 - 4*x2*x0;
+}
 
 /*
-*** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
+*** Polynomial Constructor
 */
 
-class Computor
+Polynomial::Polynomial()
 {
-        Parser parser;
-        Polynomial reducedEq;
-
-    public:
-        int degree;
-
-        Computor (int ac, char **av);
-
-        int solver();
-        void display();
-        int getDegree() { return degree; }
-
-        ~Computor() {};
-};
-
-#endif
+    x0 = 0.0;
+    x1 = 0.0;
+    x2 = 0.0;
+    delta = 0.0;
+    str = "";
+}
