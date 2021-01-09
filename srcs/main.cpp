@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:07:49 by epham             #+#    #+#             */
-/*   Updated: 2021/01/08 18:38:01 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/09 22:43:46 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,9 @@ int main(int ac, char **av)
 {
     Computor myComputor(ac, av);
 
-    return 0;
+    if (myComputor.parse() < 0)
+        goto error;
+    error:
+        return (-1);
+    return (0);
 }

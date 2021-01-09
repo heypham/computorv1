@@ -6,7 +6,7 @@
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/08 22:15:58 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/09 22:35:49 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ class Computor
         Polynomial reducedEq;
 
     public:
-        int degree;
+        Computor (int ac, char **av) : parser(ac, av), reducedEq() {};
 
-        Computor (int ac, char **av);
-
-        int solver();
+        int  parse();
+        int  solver();
         void display();
-        int getDegree() { return degree; }
+        void getDegree();
 
         ~Computor() {};
 };

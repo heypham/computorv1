@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/09 13:35:09 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/09 22:50:23 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 *** Remove string spaces
 */
 
-int Parser::removeSpace()
+void Parser::removeSpace()
 {
     regex e (" ");
 
     equation = regex_replace(equation, e, "");
-    return 0;
 }
 
 /*
@@ -43,6 +42,10 @@ vector<string> Parser::splitEquation()
         s.erase(0, pos + 1);
         result.push_back(token);
     }
+    if (s == "")
+        cout << "end s : [" << s << "]\n";
+    else if (s == "\0")
+        cout << "s is \\0 !\n";
     result.push_back(s);
     return result;
 }
@@ -51,34 +54,36 @@ vector<string> Parser::splitEquation()
 *** Check how many expressions in equation
 */
 
-int Parser::checkExpressionNumber(vector<string> expressions)
+void Parser::checkExpressionNumber(vector<string> expressions)
 {
-    if (expressions.size() != 2)
+    if (errorCode < 0)
+        return ;
+    if (expressions.size() == 2)
+    {
+        leftPoly.str = expressions[0];
+        rightPoly.str = expressions[1];
+    }
+    else
     {
         errorCode = -1;
         errorStr = "incorrect number of '='. You either have more than one equation, or no equation at all!";
-        return -1;
     }
-    leftPoly.str = expressions[0];
-    rightPoly.str = expressions[1];
-    return 0;
+    
 }
 
 /*
 *** Check each expression of the equation
 */
 
-int Parser::verifyExpressions()
+void Parser::verifyExpressions()
 {
     if (errorCode < 0)
-        return errorCode;
+        return ;
     if (leftPoly.str == "" || rightPoly.str == "")
     {
         errorCode = -2;
         errorStr = "incomplete equation. Verify you have expressions on both sides of the '='.";
-        return -1;
     }
-    return 0;
 }
 
 /*
@@ -93,32 +98,68 @@ int Parser::verifyExpressions()
 *** 5. power value b of 4.
 *** 6. means 3. is a X single value (= ax^1)
 *** 7. single number value a (= a * x^0)
-*** 8. single x val (a = +-1, b = 1)
-*** 9. single x val is format +-x
+*** 8. ax^b where a = +-1
+*** 9. sign of a (+-)
 *** 10. -
-*** 11. single x val is format x+-
+*** 11. power b of 8 exists (if this group is empty then format +-x)
+*** 12. value of b power
 */
 
-int Parser::parseExpression(Polynomial poly)
+void Parser::parseExpression(Polynomial *poly)
 {
-    static const regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([012]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([012]))?))");
+    regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([012]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([012]))?))");
     sregex_iterator begin;
     sregex_iterator end;
+    size_t pos;
 
-    begin = sregex_iterator(poly.str.begin(), poly.str.end(), e);
+    if (errorCode < 0)
+        return ;
+    begin = sregex_iterator(poly->str.begin(), poly->str.end(), e);
     end = sregex_iterator();
-    cout << distance(begin, end) << " matches found." << endl;
-    for (sregex_iterator i = begin; i != end; ++i) {
-        smatch match = *i;
+    pos = 0;
+    while (begin != end)
+    {
+        smatch match = *begin++;
         string match_str = match.str(); 
-        cout << match_str << '\n';
-        for (unsigned i=1; i<match.size(); ++i) 
+        if (match.position() != pos)
         {
-            cout << "[" << match[i] << "] ";
+            errorStr = "Unexpected character at position " + to_string(pos);
+            errorCode = -3;
         }
-        cout << endl;
-    }   
-  return 0;
+        poly->parseFactors(match);
+        pos += match.length();
+    }
+    if (pos != poly->str.length())
+    {
+        errorStr = "Unexpected character at position " + to_string(pos);
+        errorCode = -3;
+    }
+}
+
+/*
+*** Adding level of abstraction to call from Computor class
+*/
+
+void Parser::parseExpressions()
+{
+    parseExpression(&leftPoly);
+    parseExpression(&rightPoly);
+}
+
+int Parser::parse()
+{
+    removeSpace();
+    checkExpressionNumber(splitEquation());
+    verifyExpressions();
+    parseExpressions();
+    if (errorCode < 0)
+    {
+        cout << "Wrong equation format : " << errorStr << endl;
+        return (-1);
+    }
+    // cout << "Polynomial : " << leftPoly.x2 << "x^2 + " << leftPoly.x1 << "x^1 + " << leftPoly.x0 << "x^0\n"; 
+    // cout << "Polynomial : " << rightPoly.x2 << "x^2 + " << rightPoly.x1 << "x^1 + " << rightPoly.x0 << "x^0\n";
+    return (0);
 }
 
 /*
@@ -137,21 +178,9 @@ Parser::Parser(int ac, char **av) : leftPoly(), rightPoly()
     if (ac != 2)
     {
         while (++i < ac)
-        {
-            // cout << "current arg : " << av[i] << endl;
             args += av[i];
-        }
     }
     else
         args = av[1];
     equation = args;
-    removeSpace();
-    // cout << "equation after remove space " << equation << endl;
-    
-    checkExpressionNumber(splitEquation());
-    verifyExpressions();
-    parseExpression(leftPoly);
-    parseExpression(rightPoly);
-    if (errorCode < 0)
-        cout << "Wrong equation format : " << errorStr << endl;
 }
