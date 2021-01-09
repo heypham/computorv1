@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   polynomial.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/09 02:26:38 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/09 13:55:56 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double sqrt(double delta)
 {
-    return (0);
+    return (delta);
 }
 
 void Polynomial::setDeterminant()
@@ -23,14 +23,28 @@ void Polynomial::setDeterminant()
 }
 
 /*
+*** Parse polynomial factors from regex string matches
+*/
+
+// int Polynomial::parseFactors(smatch match, double lr)
+// {
+//     double a;
+//     int b;
+
+//     a = 0.0;
+//     b = 0;
+//     return 0;
+// }
+
+/*
 *** Polynomial Constructor
 */
 
 Polynomial::Polynomial()
 {
-    x0 = 0.0;
-    x1 = 0.0;
     x2 = 0.0;
+    x1 = 0.0;
+    x0 = 0.0;
     delta = 0.0;
     str = "";
 }

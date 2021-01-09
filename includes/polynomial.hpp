@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   polynomial.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:04:49 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/08 22:16:30 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/09 13:56:02 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef POLYNOMIAL_HPP
 #define POLYNOMIAL_HPP
 
+#include <regex>
 #include <string>
 
 using namespace std;
@@ -20,15 +21,16 @@ using namespace std;
 class Polynomial
 {
     public:
-        double x0;
-        double x1;
-        double x2;
-        double delta;
-        string str;
+        double  x2;
+        double  x1;
+        double  x0;
+        double  delta;
+        string  str;
 
         Polynomial();
         
-        void setDeterminant();
+        void    setDeterminant();
+        // int     parseFactors(smatch match, double lr);
 
         ~Polynomial() {};
 };

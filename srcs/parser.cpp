@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/09 02:24:14 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/09 13:35:09 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,28 +91,27 @@ int Parser::verifyExpressions()
 *** 3. means found X value (x or x^b)
 *** 4. means 3. is a x powered value (x^b)
 *** 5. power value b of 4.
-*** 6. means 3. is a X single value (= x^0)
+*** 6. means 3. is a X single value (= ax^1)
 *** 7. single number value a (= a * x^0)
+*** 8. single x val (a = +-1, b = 1)
+*** 9. single x val is format +-x
+*** 10. -
+*** 11. single x val is format x+-
 */
 
 int Parser::parseExpression(Polynomial poly)
 {
-    static const regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]?\\^([012]))|([Xx])))|([+-]?\\d*\\.?\\d+)");
-    const char *s;
-    // smatch cm;
-
-    // s = poly.str.c_str();
-    // cout << s << endl;
+    static const regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([012]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([012]))?))");
     sregex_iterator begin;
     sregex_iterator end;
 
     begin = sregex_iterator(poly.str.begin(), poly.str.end(), e);
     end = sregex_iterator();
-    cout << std::distance(begin, end) << " matches found." << endl;
-    for (std::sregex_iterator i = begin; i != end; ++i) {
-        std::smatch match = *i;
-        std::string match_str = match.str(); 
-        std::cout << match_str << '\n';
+    cout << distance(begin, end) << " matches found." << endl;
+    for (sregex_iterator i = begin; i != end; ++i) {
+        smatch match = *i;
+        string match_str = match.str(); 
+        cout << match_str << '\n';
         for (unsigned i=1; i<match.size(); ++i) 
         {
             cout << "[" << match[i] << "] ";
