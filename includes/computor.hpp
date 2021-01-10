@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/09 22:35:49 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/10 13:13:23 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Computor
         Computor (int ac, char **av) : parser(ac, av), reducedEq() {};
 
         int  parse();
-        int  solver();
+        int  solve();
         void display();
         void getDegree();
 

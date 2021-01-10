@@ -3,22 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   polynomial.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/09 22:45:33 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/10 16:45:14 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "polynomial.hpp"
 
-double sqrt(double delta)
+/*
+*** Calculate square root of determinant using
+*** Logarithmic approx then babylonian method
+*/
+
+float sqrt(float delta)
 {
-    return (delta);
+    union
+    {
+        int i;
+        float x;
+    } u;
+    u.x = delta;
+    // cout << "u.x " << u.x << " | u.i " << u.i << endl;
+    u.i = (1 << 29) + (u.i >> 1) - (1 << 22);
+    // cout << "u.x " << u.x << " | u.i " << u.i << endl;
+    u.x = 0.5 * (u.x + delta/u.x);
+    u.x = 0.5 * (u.x + delta/u.x);
+    u.x = 0.5 * (u.x + delta/u.x);
+    // cout << "u.x " << u.x << " | u.i " << u.i << endl;
+    return (u.x);
 }
 
-void Polynomial::calculateDeterminant()
+/*
+*** Solve equation
+*/
+
+void Polynomial::solveEquation()
 {
+    if (x2 == 0 && x1 > 0)
+        sol1 = -x0 / x1;
+    else if (delta > 0.0)
+    {
+        sqrt_delta = sqrt(delta);
+        sol1 = (- x1 + sqrt_delta) / (2 * x2);
+        sol2 = (- x1 - sqrt_delta) / (2 * x2);
+    }
+    else if (delta == 0.0)
+        sol1 = -x1 / (2 * x2);
+    else if (delta < 0.0)
+    {
+        sqrt_delta = sqrt(-delta);
+        sol1 = -x1 / (2 * x2);
+        sol2 = sqrt_delta / (2 * x2);
+    }
+}
+
+/*
+*** Calculate delta value from factors parsed in regex string
+*/
+
+void Polynomial::calculateDiscriminant()
+{
+    // cout << "b^2 - 4ac : " << x1 << "**2 - 4 * " << x2 << "*" << x0 << endl;
     delta = x1*x1 - 4*x2*x0;
 }
 
@@ -28,7 +75,7 @@ void Polynomial::calculateDeterminant()
 
 int Polynomial::parseFactors(smatch match)
 {
-    double a;
+    float a;
     int b;
 
     a = 0.0;

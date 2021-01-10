@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/09 22:50:23 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/10 12:55:06 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void Parser::parseExpression(Polynomial *poly)
     regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([012]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([012]))?))");
     sregex_iterator begin;
     sregex_iterator end;
-    size_t pos;
+    unsigned long pos;
 
     if (errorCode < 0)
         return ;
@@ -121,7 +121,7 @@ void Parser::parseExpression(Polynomial *poly)
     {
         smatch match = *begin++;
         string match_str = match.str(); 
-        if (match.position() != pos)
+        if (match.position() != (long)pos)
         {
             errorStr = "Unexpected character at position " + to_string(pos);
             errorCode = -3;

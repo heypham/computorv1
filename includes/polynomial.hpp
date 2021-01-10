@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   polynomial.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:04:49 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/09 22:45:14 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/10 14:02:43 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,21 @@ using namespace std;
 class Polynomial
 {
     public:
-        double  x2;
-        double  x1;
-        double  x0;
-        double  delta;
+        float  x2;
+        float  x1;
+        float  x0;
+        float  delta;
+        float  sqrt_delta;
+        float  sol1;
+        float  sol2;
         int     degree;
         string  str;
 
         Polynomial();
         
-        void    calculateDeterminant();
+        void    calculateDiscriminant();
         int     parseFactors(smatch match);
+        void  solveEquation();
 
         ~Polynomial() {};
 };
