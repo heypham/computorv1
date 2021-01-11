@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:04:49 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/10 14:02:43 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/11 16:27:03 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ using namespace std;
 class Polynomial
 {
     public:
-        float  x2;
-        float  x1;
-        float  x0;
-        float  delta;
-        float  sqrt_delta;
-        float  sol1;
-        float  sol2;
+        float   x2;
+        float   x1;
+        float   x0;
+        float   delta;
+        float   sqrt_delta;
+        float   sol1;
+        float   sol2;
         int     degree;
         string  str;
 
@@ -36,7 +36,8 @@ class Polynomial
         
         void    calculateDiscriminant();
         int     parseFactors(smatch match);
-        void  solveEquation();
+        int     verifyCoef(float a, string s);
+        void    solveEquation();
 
         ~Polynomial() {};
 };

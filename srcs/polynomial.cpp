@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/10 16:45:14 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/11 17:15:22 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 *** Calculate square root of determinant using
 *** Logarithmic approx then babylonian method
+*** https://en.wikipedia.org/wiki/Methods_of_computing_square_roots
 */
 
 float sqrt(float delta)
@@ -25,13 +26,10 @@ float sqrt(float delta)
         float x;
     } u;
     u.x = delta;
-    // cout << "u.x " << u.x << " | u.i " << u.i << endl;
     u.i = (1 << 29) + (u.i >> 1) - (1 << 22);
-    // cout << "u.x " << u.x << " | u.i " << u.i << endl;
     u.x = 0.5 * (u.x + delta/u.x);
     u.x = 0.5 * (u.x + delta/u.x);
     u.x = 0.5 * (u.x + delta/u.x);
-    // cout << "u.x " << u.x << " | u.i " << u.i << endl;
     return (u.x);
 }
 
@@ -41,7 +39,7 @@ float sqrt(float delta)
 
 void Polynomial::solveEquation()
 {
-    if (x2 == 0 && x1 > 0)
+    if (degree == 1)
         sol1 = -x0 / x1;
     else if (delta > 0.0)
     {
@@ -65,8 +63,22 @@ void Polynomial::solveEquation()
 
 void Polynomial::calculateDiscriminant()
 {
-    // cout << "b^2 - 4ac : " << x1 << "**2 - 4 * " << x2 << "*" << x0 << endl;
     delta = x1*x1 - 4*x2*x0;
+}
+
+/*
+*** Verify positive coefficients have a + sign if not first of expression
+*/
+
+int Polynomial::verifyCoef(float a, string s)
+{
+    if ((a > 0.0 && (to_string(a).length() == s.length())) || (s == "" && a == 1.0))
+    {
+        if (x2 == 0.0 && x1 == 0.0 && x0 == 0.0)
+            return 0;
+        return -1;
+    }
+    return 0;
 }
 
 /*
@@ -77,42 +89,42 @@ int Polynomial::parseFactors(smatch match)
 {
     float a;
     int b;
+    int ret;
 
     a = 0.0;
     b = 0;
-
-    // for (unsigned i=1; i<match.size(); ++i)
-    // {
-    //     cout << "[" << match[i] << "] ";
-    // }
+    ret = 0;
     if (match[1] != "")
     {
         a = stod(match[2]);
         b = match[5] != "" ? stoi(match[5]) : 1;
+        ret = verifyCoef(a, match[2]);
     }
     else if (match[7] != "")
     {
         a = stod(match[7]);
+        ret = verifyCoef(a, match[7]);
     }
     else if (match[8] != "")
     {
-        a = match[9] == '-' ? -1.0 : 1;
+        a = match[9] == "-" ? -1.0 : 1.0;
         b = match[12] != "" ? stoi(match[12]) : 1;
+        ret = verifyCoef(a, match[9]);
     }
     switch (b)
     {
-    case 2:
-        x2 += a;
-        break;
-    case 1:
-        x1 += a;
-        break;
-    case 0:
-        x0 += a;
-        break;
+        case 2:
+            x2 += a;
+            break;
+        case 1:
+            x1 += a;
+            break;
+        case 0:
+            x0 += a;
+            break;
     }
     degree = degree > b ? degree : b;
-    return 0;
+    return ret;
 }
 
 /*
@@ -125,5 +137,9 @@ Polynomial::Polynomial()
     x1 = 0.0;
     x0 = 0.0;
     delta = 0.0;
+    sqrt_delta = 0.0;
+    sol1 = 0.0;
+    sol2 = 0.0;
+    degree = 0;
     str = "";
 }

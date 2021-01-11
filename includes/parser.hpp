@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 17:26:01 by epham             #+#    #+#             */
-/*   Updated: 2021/01/09 22:32:18 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/01/11 13:59:40 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class Parser
         string              equation;
         string              errorStr;
         int                 errorCode;
+        int                 fractionSol;
+        int                 detailSteps;
 
         Parser(int ac, char **av);
         void                removeSpace();

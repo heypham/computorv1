@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/10 13:13:23 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/11 17:27:57 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@
 
 class Computor
 {
-        Parser parser;
-        Polynomial reducedEq;
+        Parser      parser;
+        Polynomial  reducedEq;
 
     public:
         Computor (int ac, char **av) : parser(ac, av), reducedEq() {};
 
-        int  parse();
-        int  solve();
-        void display();
-        void getDegree();
+        int         parse();
+        void        solve();
+        void        display();
+        void        displayDetails();
+        void        displaySolutions();
+        void        getDegree();
 
         ~Computor() {};
 };

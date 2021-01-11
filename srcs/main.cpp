@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:07:49 by epham             #+#    #+#             */
-/*   Updated: 2021/01/10 16:33:51 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/11 15:04:44 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int main(int ac, char **av)
 
     if (myComputor.parse() < 0)
         goto error;
-    myComputor.display();
     myComputor.solve();
+    myComputor.display();
     error:
         return (-1);
     return (0);

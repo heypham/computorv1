@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/10 12:55:06 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/11 16:35:20 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ vector<string> Parser::splitEquation()
         s.erase(0, pos + 1);
         result.push_back(token);
     }
-    if (s == "")
-        cout << "end s : [" << s << "]\n";
-    else if (s == "\0")
-        cout << "s is \\0 !\n";
     result.push_back(s);
     return result;
 }
@@ -107,7 +103,7 @@ void Parser::verifyExpressions()
 
 void Parser::parseExpression(Polynomial *poly)
 {
-    regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([012]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([012]))?))");
+    regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([0-9]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([0-9]))?))");
     sregex_iterator begin;
     sregex_iterator end;
     unsigned long pos;
@@ -123,10 +119,19 @@ void Parser::parseExpression(Polynomial *poly)
         string match_str = match.str(); 
         if (match.position() != (long)pos)
         {
-            errorStr = "Unexpected character at position " + to_string(pos);
             errorCode = -3;
+            break;
         }
-        poly->parseFactors(match);
+        if (poly->parseFactors(match))
+        {
+            errorStr = "One factor is missing an operand.";
+            errorCode = -4;
+        }
+        if (poly->degree > 2)
+        {
+            errorStr = "The polynomial degree is strictly greater than 2, I can't solve.";
+            errorCode = -5;
+        }
         pos += match.length();
     }
     if (pos != poly->str.length())
@@ -173,12 +178,25 @@ Parser::Parser(int ac, char **av) : leftPoly(), rightPoly()
 
     errorStr = "";
     errorCode = 0;
+    fractionSol = 0;
+    detailSteps = 0;
 
-    i = 0;
+    i = 1;
     if (ac != 2)
     {
-        while (++i < ac)
+        while (strcmp(av[i],"-f") == 0 || strcmp(av[i],"-F") == 0 || strcmp(av[i],"-d") == 0 || strcmp(av[i],"-D") == 0)
+        {
+            if (strcmp(av[i],"-f") == 0 || strcmp(av[i],"-F") == 0)
+                fractionSol = 1;
+            if (strcmp(av[i],"-d") == 0 || strcmp(av[i],"-D") == 0)
+                detailSteps = 1;
+            i++;
+        }
+        while (i < ac)
+        {
             args += av[i];
+            i++;
+        }
     }
     else
         args = av[1];
