@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   polynomial.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/11 17:15:22 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/13 12:28:26 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 *** https://en.wikipedia.org/wiki/Methods_of_computing_square_roots
 */
 
-float sqrt(float delta)
+float _sqrt(float delta)
 {
     union
     {
@@ -43,7 +43,7 @@ void Polynomial::solveEquation()
         sol1 = -x0 / x1;
     else if (delta > 0.0)
     {
-        sqrt_delta = sqrt(delta);
+        sqrt_delta = _sqrt(delta);
         sol1 = (- x1 + sqrt_delta) / (2 * x2);
         sol2 = (- x1 - sqrt_delta) / (2 * x2);
     }
@@ -51,7 +51,7 @@ void Polynomial::solveEquation()
         sol1 = -x1 / (2 * x2);
     else if (delta < 0.0)
     {
-        sqrt_delta = sqrt(-delta);
+        sqrt_delta = _sqrt(-delta);
         sol1 = -x1 / (2 * x2);
         sol2 = sqrt_delta / (2 * x2);
     }

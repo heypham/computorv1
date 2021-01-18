@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/01/11 17:30:44 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/13 12:31:05 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void Computor::displayDetails()
         cout << "x₁ = (" << -reducedEq.x1 << " + " << reducedEq.sqrt_delta << ") / 2*" << reducedEq.x2 << endl;
         cout << "x₂ = (" << -reducedEq.x1 << " - " << reducedEq.sqrt_delta << ") / 2*" << reducedEq.x2 << "\n\n";
     }
+    else if ((reducedEq.delta == 0.0 && reducedEq.degree > 1) || reducedEq.degree == 1)
+        cout << "x = -c / b" << endl;
     else if (reducedEq.delta < 0)
     {
         cout << "√Δ = " << reducedEq.sqrt_delta <<"i" << "\n\n";
@@ -61,6 +63,8 @@ void Computor::displaySolutions()
 {
     if (reducedEq.delta > 0.0 && reducedEq.degree > 1)
         cout << "x₁ = " << reducedEq.sol1 << endl << "x₂ = " << reducedEq.sol2 << endl;
+    else if ((reducedEq.delta == 0.0 && reducedEq.degree > 1) || reducedEq.degree == 1)
+        cout << "x = " << reducedEq.sol1 << endl;
     else if (reducedEq.delta < 0)
     {
         cout << "x₁ = ("<< reducedEq.sol1 << ") + (" << reducedEq.sol2 << ") * i" << endl;
@@ -74,7 +78,12 @@ void Computor::displaySolutions()
 
 void Computor::display()
 {
-    cout << "Reduced form       : " << reducedEq.x2 << "x² + " << reducedEq.x1 << "x + " << reducedEq.x0 << " = 0\n";
+    cout << "Reduced form       : ";
+    if (reducedEq.degree == 2)
+        cout << reducedEq.x2 << "x² + ";
+    if (reducedEq.degree >= 1)
+        cout << reducedEq.x1 << "x + ";
+    cout << reducedEq.x0 << " = 0\n";
     cout << "Polynomial degree  : " << reducedEq.degree << endl;
     if (parser.detailSteps == 1 && reducedEq.degree > 1)
     {
@@ -87,18 +96,9 @@ void Computor::display()
     else if (reducedEq.delta == 0.0 && reducedEq.degree == 0 && reducedEq.x0 == 0)
         cout << "Every number x in the set of real numbers ℝ is a solution. " << endl;
     else if ((reducedEq.delta == 0.0 && reducedEq.degree > 1) || reducedEq.degree == 1)
-    {
         cout << "The solution is:" << endl;
-        if (parser.detailSteps == 1)
-            cout << "x = -c / b" << endl;
-        cout << "x = " << reducedEq.sol1 << endl;
-    }
     else if (reducedEq.delta < 0)
-    {
         cout << "Discriminant is strictly negative, the two complex solutions are:" << endl;
-        if (parser.detailSteps == 1)
-            displayDetails();
-    }
     else
         cout << "The equation does not have any solution." << endl;
     if (parser.detailSteps == 1)
