@@ -162,8 +162,6 @@ int Parser::parse()
         cout << "Wrong equation format : " << errorStr << endl;
         return (-1);
     }
-    // cout << "Polynomial : " << leftPoly.x2 << "x^2 + " << leftPoly.x1 << "x^1 + " << leftPoly.x0 << "x^0\n"; 
-    // cout << "Polynomial : " << rightPoly.x2 << "x^2 + " << rightPoly.x1 << "x^1 + " << rightPoly.x0 << "x^0\n";
     return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:09:20 by epham             #+#    #+#             */
-/*   Updated: 2021/01/11 17:27:57 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/18 15:59:42 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "parser.hpp"
 
 /*
-*** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
+*** Equation format : x2 * x^2 + x1 * x^1 + x0 * x^0
 */
 
 class Computor
