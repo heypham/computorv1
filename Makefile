@@ -6,14 +6,23 @@
 #    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/05 16:49:44 by epham             #+#    #+#              #
-#    Updated: 2021/01/18 16:00:31 by epham            ###   ########.fr        #
+#    Updated: 2021/01/20 15:29:04 by epham            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-BLANK		=	\x1b[0m
-GREEN		=	\x1b[32;01m
-RED			=	\x1b[31;01m
-YELLOW		=	\x1b[38;5;228m
+detected_OS :=	$(shell uname)
+ifeq ($(detected_OS),Darwin)        # Mac OS X
+	BLANK		=	\x1b[0m
+	GREEN		=	\x1b[32;01m
+	RED			=	\x1b[31;01m
+	YELLOW		=	\x1b[38;5;228m
+endif
+ifeq ($(detected_OS),Linux)
+    BLANK		=	\033[39m
+	GREEN		=	\033[32m
+	RED			=	\033[31m
+	YELLOW		=	\033[33m
+endif
 
 CXX			=	g++
 CXXFLAGS	=	-Wall -Wextra -Werror -MD
