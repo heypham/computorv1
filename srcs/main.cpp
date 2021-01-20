@@ -6,18 +6,35 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:07:49 by epham             #+#    #+#             */
-/*   Updated: 2021/01/11 15:04:44 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/20 16:01:49 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.hpp"
 
 /*
+*** Usage
+*/
+
+string  usage()
+{
+    string ret;
+
+    ret = "Usage :  ./computor 'a * x^2 + b * x^1 + c * x^0 = d * x^2 + e * x^1 + f * x^0'";
+    return (ret);
+}
+
+/*
 *** Equation format : a1 * x^0 + b1 * x^1 + c1 * x^2 = a2 * x^0 + b2 * x^1 + c2 * x^2
 */
 
-int main(int ac, char **av) 
+int     main(int ac, char **av) 
 {
+    if (ac == 1)
+    {
+        cout << usage() << endl;
+        return (-1);
+    }
     Computor myComputor(ac, av);
 
     if (myComputor.parse() < 0)
