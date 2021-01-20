@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/18 16:55:20 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/19 16:20:27 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void Polynomial::calculateDiscriminant()
 }
 
 /*
-*** Verify positive coefficients have a + sign if not first of expression
+*** Verify positive coefficients have a + sign if not first of expression except if first coefficient found
 */
 
 int Polynomial::verifyCoef(float a, string s)
@@ -83,6 +83,18 @@ int Polynomial::verifyCoef(float a, string s)
 
 /*
 *** Parse polynomial factors from regex string matches
+*** match[1]. term in form ax^b or a*x^b
+*** match[2]. coefficient a of term 1.
+*** match[3]. means found X value (x or x^b)
+*** match[4]. means 3. is a x powered value (x^b)
+*** match[5]. power value b of 4.
+*** match[6]. means 3. is a X single value (= ax^1)
+*** match[7]. single number value a (= a * x^0)
+*** match[8]. ax^b where a = +-1
+*** match[9]. sign of a (+-)
+*** match[10]. -
+*** match[11]. power b of 8 exists (if this group is empty then format +-x)
+*** match[12]. value of b power
 */
 
 int Polynomial::parseFactors(smatch match)

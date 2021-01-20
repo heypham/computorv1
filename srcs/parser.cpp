@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/18 16:56:57 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/19 16:20:57 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void Parser::verifyExpressions()
 /*
 *** Regex polynomial function
 ***
-*** smatch is detailed into 7 groups (0 is the match itself)
+*** smatch is detailed into 12 groups (0 is the match itself)
 *** 0. SMatch found
 *** 1. term in form ax^b or a*x^b
 *** 2. coefficient a of term 1.
@@ -176,18 +176,14 @@ Parser::Parser(int ac, char **av) : leftPoly(), rightPoly()
 
     errorStr = "";
     errorCode = 0;
-    fractionSol = 0;
     detailSteps = 0;
 
     i = 1;
     if (ac != 2)
     {
-        while (strcmp(av[i],"-f") == 0 || strcmp(av[i],"-F") == 0 || strcmp(av[i],"-d") == 0 || strcmp(av[i],"-D") == 0)
+        if (strcmp(av[i],"-d") == 0 || strcmp(av[i],"-D") == 0)
         {
-            if (strcmp(av[i],"-f") == 0 || strcmp(av[i],"-F") == 0)
-                fractionSol = 1;
-            if (strcmp(av[i],"-d") == 0 || strcmp(av[i],"-D") == 0)
-                detailSteps = 1;
+            detailSteps = 1;
             i++;
         }
         while (i < ac)

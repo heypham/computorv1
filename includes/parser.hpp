@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 17:26:01 by epham             #+#    #+#             */
-/*   Updated: 2021/01/18 15:59:33 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/19 16:13:35 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class Parser
         string              equation;
         string              errorStr;
         int                 errorCode;
-        int                 fractionSol;
         int                 detailSteps;
 
         Parser(int ac, char **av);
