@@ -1,0 +1,52 @@
+@startuml computorv1
+class Computor {
+  Parser parser
+  Polynomial reducedEq
+
+  +int parse()
+  +void solve()
+  +void display()
+  +void displayDetails()
+  +void displaySolutions()
+  +void getDegree()
+}
+
+class Parser {
+   +Polynomial leftPoly
+   +Polynomial rightPoly
+   +string equation
+   +string errorStr
+   +int errorCode
+   +int detailSteps
+
+   +void removeSpace()
+   +vector<string> splitEquation()
+   +void checkExpressionNumber()
+   +void verifyExpressions()
+   +void parseExpression()
+   +void parseExpressions()
+   +int parse()
+}
+
+class Polynomial {
+    +float x2
+    +float x1
+    +float x0
+    +float delta
+    +float sqrt_delta
+    +float sol1
+    +float sol2
+    +int degree
+    +string str
+
+    +void calculateDiscriminant()
+    +int parseFactors()
+    +int verifyCoef()
+    +void solveEquation()
+}
+
+' Relationships
+Computor *-- Parser : has 1 >
+Computor *-- Polynomial : has 1 >
+Parser *-- Polynomial : has 2 >
+@enduml
