@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
+#    By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/05 16:49:44 by epham             #+#    #+#              #
-#    Updated: 2021/01/20 15:29:04 by epham            ###   ########.fr        #
+#    Updated: 2021/01/22 18:34:05 by emiliepham       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ifeq ($(detected_OS),Linux)
 	YELLOW		=	\033[33m
 endif
 
-CXX			=	g++
+CXX			=	clang++
 CXXFLAGS	=	-Wall -Wextra -Werror -MD
 NAME		=	computor
 INCLUDES	=	includes
@@ -62,6 +62,8 @@ fclean: clean
 	@echo "\n$(RED)REMOVING COMPUTOR ...$(BLANK)"
 	@rm -f $(NAME)
 	@echo "$(YELLOW)[computor removed]$(BLANK)"
+
+re: fclean all
 
 .PHONY: all
 

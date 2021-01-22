@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/19 16:20:57 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/22 19:10:40 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void Parser::verifyExpressions()
 
 void Parser::parseExpression(Polynomial *poly)
 {
-    regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^([0-9]))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^([0-9]))?))");
+    regex e("(([+-]?\\d*\\.?\\d+)\\*?(([Xx]{1}\\^(\\d+))|([Xx])))|([+-]?\\d*\\.?\\d+)|(([+-])?([Xx]{1}(\\^(\\d+))?))");
     sregex_iterator begin;
     sregex_iterator end;
     unsigned long pos;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   polynomial.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/01/19 16:20:27 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/22 21:55:04 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void Polynomial::calculateDiscriminant()
 
 int Polynomial::verifyCoef(float a, string s)
 {
-    if ((a > 0.0 && (to_string(a).length() == s.length())) || (s == "" && a == 1.0))
+    if ((a > 0.0 && (s.length() > 0 && s[0] != '+')) || (s == "" && a == 1.0))
     {
         if (x2 == 0.0 && x1 == 0.0 && x0 == 0.0)
             return 0;
