@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/01/18 16:54:56 by epham            ###   ########.fr       */
+/*   Updated: 2021/01/25 22:13:04 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,23 @@ void Computor::displaySolutions()
 void Computor::display()
 {
     cout << "Reduced form       : ";
-    if (reducedEq.degree == 2)
-        cout << reducedEq.x2 << "x² + ";
-    if (reducedEq.degree >= 1)
-        cout << reducedEq.x1 << "x + ";
-    cout << reducedEq.x0 << " = 0\n";
-    cout << "Polynomial degree  : " << reducedEq.degree << endl;
+    // if (reducedEq.degree == 2)
+    if (reducedEq.x2 != 0)
+        cout << reducedEq.x2 << "x²";
+    // if (reducedEq.degree >= 1)
+    if (reducedEq.x1 != 0)
+    {
+        if (reducedEq.degree > 1)
+            cout << " + ";
+        cout << reducedEq.x1 << "x";
+    }
+    if (reducedEq.x0 != 0)
+    {
+        if (reducedEq.degree > 0)
+            cout << " + ";
+        cout << reducedEq.x0;
+    }
+    cout << " = 0\nPolynomial degree  : " << reducedEq.degree << endl;
     if (parser.detailSteps == 1 && reducedEq.degree > 1)
     {
         cout << "\nΔ = b² - 4ac" << endl;
