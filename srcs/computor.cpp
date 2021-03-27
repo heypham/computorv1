@@ -6,7 +6,7 @@
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/03/27 20:21:56 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/03/27 21:17:50 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ void Computor::display()
         if (reducedEq.degree > 0)
             cout << " + ";
         cout << reducedEq.x0;
+    }
+    else
+    {
+        if (reducedEq.degree == 0)
+            cout << "0";
     }
     cout << " = 0\nPolynomial degree  : " << reducedEq.degree << endl;
     if (parser.verbose == 1 && reducedEq.degree > 1)

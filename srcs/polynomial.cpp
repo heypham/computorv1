@@ -6,7 +6,7 @@
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 21:05:05 by emiliepham        #+#    #+#             */
-/*   Updated: 2021/03/27 20:44:45 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/03/27 21:15:16 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int Polynomial::verifyCoef(float a, string s)
             return 0;
         return -1;
     }
-    else if (a == 0.0 && s.length() > 0)
+    else if (a == 0.0 && s.length() > 0 && s != "0" && s != "0.0")
         return -1;
     return 0;
 }
