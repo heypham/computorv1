@@ -20,5 +20,5 @@ The program should print
 - You don't need to write the spaces `5 * X^0` can be `5*X^0`
 - Instead of writing factors as `a * X^b`, you can write `ax^b`, e.g. `./computor 5X^0 + 4X^1 - 9.3X^2 = 1X^0`
 - You can write inputs in their natural form, e.g. instead of writing `5 * X^0` and `1 * X^1` you can just write respectively `5` and `x`
-- Verbose flag for the details of equation solver
+- Verbose flag for the details of equation solver `-v`
 - Errors are managed. If input is not as expected specific error is yielded
