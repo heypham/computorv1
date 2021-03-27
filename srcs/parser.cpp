@@ -6,7 +6,7 @@
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 16:39:26 by epham             #+#    #+#             */
-/*   Updated: 2021/01/22 19:10:40 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/03/27 20:46:44 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,21 +116,23 @@ void Parser::parseExpression(Polynomial *poly)
     while (begin != end)
     {
         smatch match = *begin++;
-        string match_str = match.str(); 
+        string match_str = match.str();
         if (match.position() != (long)pos)
         {
             errorCode = -3;
-            break;
+            break ;
         }
         if (poly->parseFactors(match))
         {
             errorStr = "One factor is missing an operand.";
             errorCode = -4;
+            return ;
         }
         if (poly->degree > 2)
         {
             errorStr = "The polynomial degree is strictly greater than 2, I can't solve.";
             errorCode = -5;
+            return ;
         }
         pos += match.length();
     }
@@ -176,14 +178,14 @@ Parser::Parser(int ac, char **av) : leftPoly(), rightPoly()
 
     errorStr = "";
     errorCode = 0;
-    detailSteps = 0;
+    verbose = 0;
 
     i = 1;
     if (ac != 2)
     {
-        if (strcmp(av[i],"-d") == 0 || strcmp(av[i],"-D") == 0)
+        if (strcmp(av[i],"-v") == 0 || strcmp(av[i],"-V") == 0)
         {
-            detailSteps = 1;
+            verbose = 1;
             i++;
         }
         while (i < ac)

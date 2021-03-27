@@ -17,7 +17,7 @@ class Parser {
    +string equation
    +string errorStr
    +int errorCode
-   +int detailSteps
+   +int verbose
 
    +void removeSpace()
    +vector<string> splitEquation()

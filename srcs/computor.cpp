@@ -6,7 +6,7 @@
 /*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:15 by epham             #+#    #+#             */
-/*   Updated: 2021/01/25 22:13:04 by emiliepham       ###   ########.fr       */
+/*   Updated: 2021/03/27 20:21:56 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,8 @@ void Computor::displaySolutions()
 void Computor::display()
 {
     cout << "Reduced form       : ";
-    // if (reducedEq.degree == 2)
     if (reducedEq.x2 != 0)
         cout << reducedEq.x2 << "x²";
-    // if (reducedEq.degree >= 1)
     if (reducedEq.x1 != 0)
     {
         if (reducedEq.degree > 1)
@@ -96,7 +94,7 @@ void Computor::display()
         cout << reducedEq.x0;
     }
     cout << " = 0\nPolynomial degree  : " << reducedEq.degree << endl;
-    if (parser.detailSteps == 1 && reducedEq.degree > 1)
+    if (parser.verbose == 1 && reducedEq.degree > 1)
     {
         cout << "\nΔ = b² - 4ac" << endl;
         cout << "Δ = " << reducedEq.x1 << "² - 4 * " << reducedEq.x2 << " * " << reducedEq.x0 << endl;
@@ -112,7 +110,7 @@ void Computor::display()
         cout << "Discriminant is strictly negative, the two complex solutions are:" << endl;
     else
         cout << "The equation does not have any solution." << endl;
-    if (parser.detailSteps == 1)
+    if (parser.verbose == 1)
         displayDetails();
     displaySolutions();
 }

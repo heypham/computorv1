@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emiliepham <emiliepham@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:07:49 by epham             #+#    #+#             */
-/*   Updated: 2021/01/20 16:04:51 by epham            ###   ########.fr       */
+/*   Updated: 2021/03/27 20:20:54 by emiliepham       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ string  usage()
 {
     string ret;
 
-    ret = "Usage :  ./computor [-d] 'a * x^2 + b * x^1 + c * x^0 = d * x^2 + e * x^1 + f * x^0'";
+    ret = "Usage :  ./computor [-v] 'a * X^2 + b * X^1 + c * X^0 = d * X^2 + e * X^1 + f * X^0'";
     return (ret);
 }
 
